@@ -1,0 +1,28 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+@import "components/Footer/Footer.css";
+@import "components/Header/Header.css";
+@import "components/Home/Home.css";
+@import "components/Property/Property.css";
+@import "components/ListProperties/ListProperties.css";
+@import "components/Loading/Loading.css";
+@import "components/PropertyDetail/PropertyDetail.css";
+
+body{
+    background-image: url("/background.jpg");
+    height: 450px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-green{
+    background: #057975;
+}
+.bg-darkBrown{
+    background: #004D40;
+}
+
+

@@ -1,0 +1,39 @@
+.btn{
+    border-radius: 12px;
+}
+
+.btn-purple {
+    background-color: #580579 ;
+    color: #fff;
+}
+.btn-purple:hover{
+    background-color: #700a99;
+    color: #fff;
+}
+
+.link-green {
+    color: #580579 ;
+}
+.link-green:hover{
+    color: #700a99;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+.navbar-dark .navbar-toggler {
+    color: white;
+    border-color: white;
+}
+
+.cursor-pointer{
+    cursor:pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar{
+        background: #282c34;
+    }
+}
+.modal{
+    color: #757575;
+}
