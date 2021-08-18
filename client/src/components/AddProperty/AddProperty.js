@@ -93,7 +93,7 @@ class AddPropertyComponent extends Component {
   render() {
     return (
       <div className='container pt-5'>
-        <div className='card '>
+        <div className='card p-5 '>
           <div className='card-title text-center p-4 text-dark'>
             <h3>Add property & campaign</h3>
           </div>
@@ -315,7 +315,7 @@ class AddPropertyComponent extends Component {
                   Location
                 </Label>
                 <Col md={{ size: 6, offset: 0 }}>
-                  <Button className='btn-green' onClick={this.getLocation}>
+                  <Button className='btn-purple' onClick={this.getLocation}>
                     <span className='fa fa-location-arrow'> Get Location</span>
                   </Button>
                 </Col>
@@ -472,7 +472,7 @@ class AddPropertyComponent extends Component {
                   <Button
                     loading={this.state.loading}
                     type='submit'
-                    className='btn-block btn-green'
+                    className='btn-block btn-purple'
                   >
                     Add Property
                   </Button>
