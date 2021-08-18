@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Button, Label, Col, Row } from 'reactstrap';
+
+import factory from '../../ethereum/factory';
+import web3 from '../../ethereum/web3';
+
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => !val || val.length >= len;
@@ -14,13 +18,18 @@ class AddPropertyComponent extends Component {
       imageFile: null,
       latitude: '',
       longitude: '',
+      minimumContribution: '',
+      errorMessage: '',
+      loading: false,
     };
   }
   componentDidMount() {
     this.props.resetAddPropertyForm();
   }
 
-  handleSubmit = (values) => {
+  handleSubmit = async (values) => {
+    // event.preventDefault();
+    this.setState({ loading: true, errorMessage: '' });
     if (this.state.imageFile === null) {
       alert('Please add Image of Property');
     } else if (this.state.latitude === '') {
@@ -39,6 +48,22 @@ class AddPropertyComponent extends Component {
       this.props.addProperty(val);
       this.props.resetAddPropertyForm();
     }
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await factory.methods
+        // .createCampaign(this.state.minimumContribution)
+        .createCampaign('100')
+        .send({
+          from: accounts[0],
+        });
+
+      // Router.pushRoute('/');
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+
+    this.setState({ loading: false });
   };
 
   imageHandler = (event) => {
@@ -69,8 +94,8 @@ class AddPropertyComponent extends Component {
     return (
       <div className='container pt-5'>
         <div className='card '>
-          <div className='card-title text-center p-4 bg-green text-white'>
-            <h3>Add New Property</h3>
+          <div className='card-title text-center p-4 text-dark'>
+            <h3>Add property & campaign</h3>
           </div>
           <div className='card-body'>
             <Form
@@ -240,10 +265,10 @@ class AddPropertyComponent extends Component {
                     model='.city'
                     name='city'
                     className='form-control'
-                    defaultValue='Rawalpindi'
+                    defaultValue='Praha'
                   >
-                    <option>Rawalpindi</option>
-                    <option>Islamabad</option>
+                    <option>Praha</option>
+                    <option>Brno</option>
                   </Control.select>
                 </Col>
               </Row>
@@ -278,10 +303,10 @@ class AddPropertyComponent extends Component {
                     model='.areaUnit'
                     name='areaUnit'
                     className='form-control'
-                    defaultValue='Marla'
+                    defaultValue='m2'
                   >
-                    <option>Marla</option>
-                    <option>Kanal</option>
+                    <option>m2</option>
+                    <option>other unit</option>
                   </Control.select>
                 </Col>
               </Row>
@@ -343,11 +368,48 @@ class AddPropertyComponent extends Component {
                     className='form-control'
                     defaultValue='Lac'
                   >
-                    <option>Lac</option>
-                    <option>Crore</option>
+                    <option>Czk</option>
+                    <option>Eur</option>
                   </Control.select>
                 </Col>
               </Row>
+              {/* <Row className='form-group'>
+                <Label htmlFor='minimumContribution' md={2}>
+                  Minimum Contribution
+                </Label>
+                <Col md={3}>
+                  <Control.text
+                    model='.price'
+                    id='price'
+                    name='price'
+                    placeholder='Price'
+                    className='form-control'
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
+                  />
+                  <Errors
+                    model='.price'
+                    className='text-danger'
+                    show='touched'
+                    messages={{
+                      required: 'Required',
+                      isNumber: 'Must be Number',
+                    }}
+                  />
+                </Col>
+                <Col md={3}>
+                  <Control.select
+                    model='.priceUnit'
+                    name='priceUnit'
+                    className='form-control'
+                    defaultValue='Wei'
+                  >
+                    <option>Wei</option>
+                  </Control.select>
+                </Col>
+              </Row> */}
               <Row className='form-group'>
                 <Label htmlFor='contact' md={2}>
                   Contact No
@@ -357,7 +419,7 @@ class AddPropertyComponent extends Component {
                     model='.contact'
                     id='contact'
                     name='contact'
-                    placeholder='03*********'
+                    placeholder='+421*********'
                     className='form-control'
                     validators={{
                       required,
@@ -407,7 +469,11 @@ class AddPropertyComponent extends Component {
               </Row>
               <Row className='form-group'>
                 <Col md={{ size: 6, offset: 2 }}>
-                  <Button type='submit' className='btn-block btn-green'>
+                  <Button
+                    loading={this.state.loading}
+                    type='submit'
+                    className='btn-block btn-green'
+                  >
                     Add Property
                   </Button>
                 </Col>

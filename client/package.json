@@ -73,7 +73,14 @@
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.9",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3"
+    "workbox-webpack-plugin": "3.6.3",
+    "ganache-cli": "^6.0.3",
+    "mocha": "^4.1.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.1",
+    "solc": "^0.4.19",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "1.0.0-beta.26"
   },
   "scripts": {
     "start": "node scripts/start.js",

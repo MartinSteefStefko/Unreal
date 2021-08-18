@@ -97,12 +97,10 @@ class Main extends Component {
               />
             )}
           />
-          <PrivateRoute
-            exact
-            path='/admin/dashboard'
-            component={AdminDashboard}
-          />
-          <PrivateRoute
+          {/* <PrivateRoute */}
+          <Route exact path='/admin/dashboard' component={AdminDashboard} />
+          {/* <PrivateRoute */}
+          <Route
             exact
             path='/user/dashboard'
             component={() => (
@@ -114,7 +112,8 @@ class Main extends Component {
               />
             )}
           />
-          <PrivateRoute
+          {/* <PrivateRoute */}
+          <Route
             path='/property/add'
             component={() => (
               <AddProperty
