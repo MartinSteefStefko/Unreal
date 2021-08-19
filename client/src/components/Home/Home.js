@@ -170,7 +170,7 @@ class Home extends Component {
           </div>
 
           <div className='container mt-5'>
-            <div className='row '>
+            <div className='row'>
               <Property
                 properties={recentProperties}
                 isLoading={isLoading}

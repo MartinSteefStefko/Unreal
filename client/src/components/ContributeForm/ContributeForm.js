@@ -38,18 +38,24 @@ class ContributeForm extends Component {
     return (
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Amount to Contribute</label>
+          <label>Amount to Buy</label>
           <Input
             value={this.state.value}
             onChange={(event) => this.setState({ value: event.target.value })}
             label='ether'
             labelPosition='right'
+            placeholder={`max. ${'propertyPriceAtCreation.ethereum'}`}
           />
         </Form.Field>
 
         <Message error header='Oops!' content={this.state.errorMessage} />
-        <Button className='btn-purple' loading={this.state.loading}>
-          Contribute!
+        <Button
+          className='btn-purple '
+          size='lg'
+          block
+          loading={this.state.loading}
+        >
+          Buy!
         </Button>
       </Form>
     );

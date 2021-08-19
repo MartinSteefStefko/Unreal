@@ -42,7 +42,7 @@ const PropertyComponent = ({ properties, isLoading, errMess }) => {
                 </Link>
               </div>
               <div className='col-md-4'>
-                <p className='text-success'>{`RS: ${property.price} ${property.priceUnit}`}</p>
+                <p className='text-success'>{`${property.price} ${property.priceUnit}`}</p>
               </div>
             </div>
             <div className='row'>

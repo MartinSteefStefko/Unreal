@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'semantic-ui-react';
-import { Link } from '../../../routes';
-import Layout from '../../../components/Layout';
+import { Table } from 'semantic-ui-react';
+import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
+// import Layout from '../../../components/Layout';
 import Campaign from '../../../ethereum/campaign';
-import RequestRow from '../../../components/RequestRow';
+import RequestRow from '../../RequestRow/RequestRow';
 
 class RequestIndex extends Component {
   static async getInitialProps(props) {
@@ -41,19 +42,19 @@ class RequestIndex extends Component {
     const { Header, Row, HeaderCell, Body } = Table;
 
     return (
-      <Layout>
+      <div>
         <h3>Requests</h3>
-        <Link route={`/campaigns/${this.props.address}/requests/new`}>
+        <Link to={`/campaigns/${this.props.address}/requests/new`}>
           <a>
-            <Button primary floated="right" style={{ marginBottom: 10 }}>
+            <Button size='lg' block className='btn-purple'>
               Add Request
             </Button>
           </a>
         </Link>
-        <Table>
+        <Table size='small' basic='very'>
           <Header>
             <Row>
-              <HeaderCell>ID</HeaderCell>
+              {/* <HeaderCell>ID</HeaderCell> */}
               <HeaderCell>Description</HeaderCell>
               <HeaderCell>Amount</HeaderCell>
               <HeaderCell>Recipient</HeaderCell>
@@ -62,10 +63,10 @@ class RequestIndex extends Component {
               <HeaderCell>Finalize</HeaderCell>
             </Row>
           </Header>
-          <Body>{this.renderRows()}</Body>
+          {/* <Body>{this.renderRows()}</Body> */}
         </Table>
-        <div>Found {this.props.requestCount} requests.</div>
-      </Layout>
+        {/* <div>Found {this.props.requestCount} requests.</div> */}
+      </div>
     );
   }
 }

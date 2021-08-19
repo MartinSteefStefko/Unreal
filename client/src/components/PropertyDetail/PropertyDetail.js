@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Moment from 'react-moment';
 import { Label, Button, Row, Col } from 'reactstrap';
 import { Errors, Control, Form } from 'react-redux-form';
@@ -13,6 +14,14 @@ const validEmail = (val) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class PropertyDetailComponent extends Component {
+  state = {
+    ethereum: {
+      czk: 0,
+    },
+    propertyPriceNow: {
+      ethereum: 0,
+    },
+  };
   handleSubmit = (values) => {
     const val = {
       ...values,
@@ -24,10 +33,31 @@ class PropertyDetailComponent extends Component {
 
   componentDidMount() {
     this.props.resetEmailOwnerForm();
+    axios
+      .get(
+        'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=CZK'
+      )
+      .then((response) => {
+        this.setState(
+          {
+            ethereum: {
+              czk: response.data.ethereum.czk,
+            },
+            propertyPriceNow: {
+              ethereum: this.props.property.price / response.data.ethereum.czk,
+            },
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      })
+      .catch((error) => {});
   }
 
   render() {
     const { property, isLoading, errMess } = this.props;
+    const { ethereum, propertyPriceNow } = this.state;
     if (isLoading) {
       return (
         <div className='col-12 col-md p-5'>
@@ -46,7 +76,7 @@ class PropertyDetailComponent extends Component {
           <div className='card div-rounded p-5'>
             <div className='card-body'>
               <div className='row'>
-                <div className='col-12 col-md-8 '>
+                <div className='col-12 col-md-7 '>
                   <img
                     src={`/uploads/${property.image}`}
                     alt={property.propertytitle}
@@ -54,15 +84,18 @@ class PropertyDetailComponent extends Component {
                     height='400'
                   />
                   <div className='col-12 pt-4'>
-                    <h3>{property.propertytitle} </h3>
+                    <h2>{property.propertytitle} </h2>
+                    <h4>{property.address}</h4>
+                    <h3>{`${property.price} ${property.priceUnit}`} </h3>
+                    <h3>{`${propertyPriceNow.ethereum} ${`ETH`}`} </h3>
                     <hr />
-                    <div className=''>
+                    <div className='pb-4'>
                       <h5>Description</h5>
                       <hr />
                       <p>{property.description}</p>
                     </div>
                     <div className='row'>
-                      <div className='col-12 col-md-6'>
+                      <div className='col-12 col-md-10'>
                         <table className='table '>
                           <thead>
                             <tr>
@@ -91,20 +124,9 @@ class PropertyDetailComponent extends Component {
                             <tr>
                               <td>Price:</td>
                               <td>
-                                {`RS. ${property.price} ${property.priceUnit}`}{' '}
+                                {`${property.price} ${property.priceUnit}`}{' '}
                               </td>
                             </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className='col-12 col-md-6'>
-                        <table className='table '>
-                          <thead>
-                            <tr>
-                              <th>&nbsp;</th>
-                            </tr>
-                          </thead>
-                          <tbody>
                             <tr>
                               <td>Garage:</td>
                               <td>{property.garage ? 'Yes' : 'No'}</td>
@@ -131,7 +153,7 @@ class PropertyDetailComponent extends Component {
                                 <a
                                   href={`https://www.google.com/maps?q=${property.location.coordinates[0]},${property.location.coordinates[1]}`}
                                   target='_blank'
-                                  className='btn btn-block btn-purple'
+                                  className='btn btn-block btn-purple btn-lg'
                                 >
                                   See Location
                                 </a>
@@ -142,8 +164,8 @@ class PropertyDetailComponent extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className='row p-2'>
-                    <div className='col-12 col-md-6'>
+                  <div className='row p-4'>
+                    <div className='col-12 col-md-8'>
                       <h5>Contact Info</h5>
                       <hr />
                       <div className='d-flex flex-row justify-content-around'>
@@ -266,6 +288,8 @@ class PropertyDetailComponent extends Component {
                               <Button
                                 type='submit'
                                 className='btn-block btn-purple'
+                                size='lg'
+                                block
                               >
                                 Send Email
                               </Button>
@@ -277,7 +301,7 @@ class PropertyDetailComponent extends Component {
                   </div>
                 </div>
                 <hr />
-                <div className='col-12 col-md-4'>
+                <div className='col-12 col-md-4 pl-5'>
                   <CampaignShow />
                 </div>
               </div>

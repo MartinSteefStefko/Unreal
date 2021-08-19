@@ -25,4 +25,17 @@ body{
     background: #004D40;
 }
 
+.ui.cards {
+    display: flex;
+    margin: 0px !important;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+.container {
+    /* max-width:1340px!important; */
+}
+
+h4{
+    color: #adadad;
+}
 

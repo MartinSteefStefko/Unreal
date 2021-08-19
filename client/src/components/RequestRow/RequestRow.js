@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'semantic-ui-react';
-import web3 from '../ethereum/web3';
-import Campaign from '../ethereum/campaign';
+import web3 from '../../ethereum/web3';
+import Campaign from '../../ethereum/campaign';
 
 class RequestRow extends Component {
   onApprove = async () => {
@@ -9,7 +9,7 @@ class RequestRow extends Component {
 
     const accounts = await web3.eth.getAccounts();
     await campaign.methods.approveRequest(this.props.id).send({
-      from: accounts[0]
+      from: accounts[0],
     });
   };
 
@@ -18,7 +18,7 @@ class RequestRow extends Component {
 
     const accounts = await web3.eth.getAccounts();
     await campaign.methods.finalizeRequest(this.props.id).send({
-      from: accounts[0]
+      from: accounts[0],
     });
   };
 
@@ -41,14 +41,14 @@ class RequestRow extends Component {
         </Cell>
         <Cell>
           {request.complete ? null : (
-            <Button color="green" basic onClick={this.onApprove}>
+            <Button color='green' basic onClick={this.onApprove}>
               Approve
             </Button>
           )}
         </Cell>
         <Cell>
           {request.complete ? null : (
-            <Button color="teal" basic onClick={this.onFinalize}>
+            <Button color='teal' basic onClick={this.onFinalize}>
               Finalize
             </Button>
           )}

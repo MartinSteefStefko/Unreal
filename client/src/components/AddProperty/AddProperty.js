@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Button, Label, Col, Row } from 'reactstrap';
 
@@ -14,6 +15,7 @@ class AddPropertyComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      description: '',
       image: '',
       imageFile: null,
       latitude: '',
@@ -21,30 +23,52 @@ class AddPropertyComponent extends Component {
       minimumContribution: '',
       errorMessage: '',
       loading: false,
+      ethereum: {
+        czk: 0,
+      },
+      suggestedPriceAtCreation: {
+        ethereum: 0,
+      },
+      requiredPropertyPrice: {
+        czk: 0,
+      },
     };
   }
   componentDidMount() {
     this.props.resetAddPropertyForm();
+
+    // this.props.resetEmailOwnerForm();
+    // call should beexecuted in hadnle submit
   }
 
   handleSubmit = async (values) => {
+    const {
+      imageFile,
+      latitude,
+      longitude,
+      image,
+      minimumContribution,
+      suggestedPriceAtCreation,
+      description,
+    } = this.state;
     // event.preventDefault();
     this.setState({ loading: true, errorMessage: '' });
-    if (this.state.imageFile === null) {
+    if (imageFile === null) {
       alert('Please add Image of Property');
-    } else if (this.state.latitude === '') {
+    } else if (latitude === '') {
       alert('Please Add Location');
     } else {
       const val = {
         ...values,
-        image: this.state.image,
-        latitude: this.state.latitude,
-        longitude: this.state.longitude,
+        image: image,
+        latitude: latitude,
+        longitude: longitude,
         email: this.props.auth.user.email,
       };
       const formData = new FormData();
-      formData.append('image', this.state.imageFile);
+      formData.append('image', imageFile);
       this.props.addImageToServer(formData);
+
       this.props.addProperty(val);
       this.props.resetAddPropertyForm();
     }
@@ -52,8 +76,12 @@ class AddPropertyComponent extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
       await factory.methods
-        // .createCampaign(this.state.minimumContribution)
-        .createCampaign('100')
+        // .createCampaign(minimumContribution)
+        .createCampaign(
+          minimumContribution,
+          suggestedPriceAtCreation.ethereum,
+          description
+        )
         .send({
           from: accounts[0],
         });
@@ -64,6 +92,49 @@ class AddPropertyComponent extends Component {
     }
 
     this.setState({ loading: false });
+  };
+
+  requiredPriceHandler = (event) => {
+    axios
+      .get(
+        'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=CZK'
+      )
+      .then((response) => {
+        console.log(response.data.ethereum.czk);
+        this.setState(
+          {
+            ethereum: {
+              czk: response.data.ethereum.czk,
+            },
+            suggestedPriceAtCreation: {
+              ethereum:
+                this.state.requiredPropertyPrice.czk /
+                response.data.ethereum.czk,
+            },
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      })
+      .catch((error) => {});
+    this.setState({
+      requiredPropertyPrice: {
+        czk: event.target.value,
+      },
+    });
+  };
+
+  minimumContributionHandler = (event) => {
+    this.setState({
+      minimumContribution: event.target.value,
+    });
+  };
+
+  descriptionHandler = (event) => {
+    this.setState({
+      description: event.target.value,
+    });
   };
 
   imageHandler = (event) => {
@@ -91,6 +162,7 @@ class AddPropertyComponent extends Component {
   };
 
   render() {
+    const { suggestedPriceAtCreation } = this.state;
     return (
       <div className='container pt-5'>
         <div className='card p-5 '>
@@ -145,6 +217,105 @@ class AddPropertyComponent extends Component {
                     <option>Sale</option>
                     <option>Rent</option>
                   </Control.select>
+                </Col>
+              </Row>
+              <Row className='form-group'>
+                <Label htmlFor='price' md={2}>
+                  Price
+                </Label>
+                <Col md={3}>
+                  <Control.text
+                    model='.price'
+                    id='price'
+                    name='price'
+                    onChange={this.requiredPriceHandler}
+                    placeholder={suggestedPriceAtCreation.ethereum}
+                    className='form-control'
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
+                  />
+                  <Errors
+                    model='.price'
+                    className='text-danger'
+                    show='touched'
+                    messages={{
+                      required: 'Required',
+                      isNumber: 'Must be Number',
+                    }}
+                  />
+                </Col>
+                <Col md={3}>
+                  <Control.select
+                    model='.priceUnit'
+                    name='priceUnit'
+                    className='form-control'
+                    defaultValue='Lac'
+                  >
+                    <option>Czk</option>
+                    <option>Eur</option>
+                  </Control.select>
+                </Col>
+              </Row>
+              <Row className='form-group'>
+                <Label htmlFor='priceEthereum' md={2}>
+                  Required price in ETH
+                </Label>
+                <Col md={{ size: 3, offset: 0 }}>
+                  <Control.text
+                    model='.priceEthereum'
+                    id='priceEthereum'
+                    name='priceEthereum'
+                    placeholder={suggestedPriceAtCreation.ethereum * 1.05}
+                    className='form-control'
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
+                  />
+                  <Errors
+                    model='.priceEthereum'
+                    className='text-danger'
+                    show='touched'
+                    messages={{
+                      required: 'Required',
+                      isNumber: 'Must be Number',
+                    }}
+                  />
+                </Col>
+                <Col md={{ size: 3, offset: 0 }}>
+                  <span>{`Current price is ${
+                    suggestedPriceAtCreation.ethereum
+                  } ${`ETH`}`}</span>
+                </Col>
+              </Row>
+              <Row className='form-group'>
+                <Label htmlFor='minimumContribution' md={2}>
+                  Minimum Contribution in Wei
+                </Label>
+                <Col md={4}>
+                  <Control.text
+                    model='.minimumContribution'
+                    id='minimumContribution'
+                    name='minimumContribution'
+                    onChange={this.minimumContributionHandler}
+                    placeholder='100 Wei'
+                    className='form-control'
+                    validators={{
+                      required,
+                      isNumber,
+                    }}
+                  />
+                  <Errors
+                    model='.minimumContribution'
+                    className='text-danger'
+                    show='touched'
+                    messages={{
+                      required: 'Required',
+                      isNumber: 'Must be Number',
+                    }}
+                  />
                 </Col>
               </Row>
               <Row className='form-group'>
@@ -336,81 +507,6 @@ class AddPropertyComponent extends Component {
                 </Col>
               </Row>
               <Row className='form-group'>
-                <Label htmlFor='price' md={2}>
-                  Price
-                </Label>
-                <Col md={3}>
-                  <Control.text
-                    model='.price'
-                    id='price'
-                    name='price'
-                    placeholder='Price'
-                    className='form-control'
-                    validators={{
-                      required,
-                      isNumber,
-                    }}
-                  />
-                  <Errors
-                    model='.price'
-                    className='text-danger'
-                    show='touched'
-                    messages={{
-                      required: 'Required',
-                      isNumber: 'Must be Number',
-                    }}
-                  />
-                </Col>
-                <Col md={3}>
-                  <Control.select
-                    model='.priceUnit'
-                    name='priceUnit'
-                    className='form-control'
-                    defaultValue='Lac'
-                  >
-                    <option>Czk</option>
-                    <option>Eur</option>
-                  </Control.select>
-                </Col>
-              </Row>
-              {/* <Row className='form-group'>
-                <Label htmlFor='minimumContribution' md={2}>
-                  Minimum Contribution
-                </Label>
-                <Col md={3}>
-                  <Control.text
-                    model='.price'
-                    id='price'
-                    name='price'
-                    placeholder='Price'
-                    className='form-control'
-                    validators={{
-                      required,
-                      isNumber,
-                    }}
-                  />
-                  <Errors
-                    model='.price'
-                    className='text-danger'
-                    show='touched'
-                    messages={{
-                      required: 'Required',
-                      isNumber: 'Must be Number',
-                    }}
-                  />
-                </Col>
-                <Col md={3}>
-                  <Control.select
-                    model='.priceUnit'
-                    name='priceUnit'
-                    className='form-control'
-                    defaultValue='Wei'
-                  >
-                    <option>Wei</option>
-                  </Control.select>
-                </Col>
-              </Row> */}
-              <Row className='form-group'>
                 <Label htmlFor='contact' md={2}>
                   Contact No
                 </Label>
@@ -424,8 +520,8 @@ class AddPropertyComponent extends Component {
                     validators={{
                       required,
                       isNumber,
-                      minLength: minLength(11),
-                      maxLength: maxLength(11),
+                      minLength: minLength(13),
+                      maxLength: maxLength(13),
                     }}
                   />
                   <Errors
@@ -453,6 +549,7 @@ class AddPropertyComponent extends Component {
                     rows='12'
                     className='form-control'
                     placeholder='Your Description goes here...'
+                    onChange={this.descriptionHandler}
                     validators={{
                       required,
                     }}
