@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Form, Input, Message, Button } from 'semantic-ui-react';
-import Campaign from '../ethereum/campaign';
-import web3 from '../ethereum/web3';
-import { Router } from '../routes';
+import { Button } from 'reactstrap';
+import { Form, Input, Message } from 'semantic-ui-react';
+import Campaign from '../../ethereum/campaign';
+import web3 from '../../ethereum/web3';
+// import { Router } from '../routes';
 
 class ContributeForm extends Component {
   state = {
     value: '',
     errorMessage: '',
-    loading: false
+    loading: false,
   };
 
-  onSubmit = async event => {
+  onSubmit = async (event) => {
     event.preventDefault();
 
     const campaign = Campaign(this.props.address);
@@ -22,10 +23,10 @@ class ContributeForm extends Component {
       const accounts = await web3.eth.getAccounts();
       await campaign.methods.contribute().send({
         from: accounts[0],
-        value: web3.utils.toWei(this.state.value, 'ether')
+        value: web3.utils.toWei(this.state.value, 'ether'),
       });
 
-      Router.replaceRoute(`/campaigns/${this.props.address}`);
+      // Router.replaceRoute(`/campaigns/${this.props.address}`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -40,14 +41,14 @@ class ContributeForm extends Component {
           <label>Amount to Contribute</label>
           <Input
             value={this.state.value}
-            onChange={event => this.setState({ value: event.target.value })}
-            label="ether"
-            labelPosition="right"
+            onChange={(event) => this.setState({ value: event.target.value })}
+            label='ether'
+            labelPosition='right'
           />
         </Form.Field>
 
-        <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button primary loading={this.state.loading}>
+        <Message error header='Oops!' content={this.state.errorMessage} />
+        <Button className='btn-purple' loading={this.state.loading}>
           Contribute!
         </Button>
       </Form>

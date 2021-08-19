@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Grid, Button } from 'semantic-ui-react';
+import { Card, Grid } from 'semantic-ui-react';
+import { Button } from 'reactstrap';
 // import Layout from '../../components/';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
@@ -24,11 +25,11 @@ class CampaignShow extends Component {
   // }
 
   state = {
-    address: '',
-    minimumContribution: 0,
-    balance: 0,
-    requestsCount: 0,
-    approversCount: 0,
+    address: '121212',
+    minimumContribution: '0',
+    balance: '0',
+    requestsCount: '0',
+    approversCount: ' 0',
     manager: '',
   };
 
@@ -38,18 +39,17 @@ class CampaignShow extends Component {
   // const { quoteId } = params;
 
   async componentDidMount() {
-    const address = this.props.match.params.campaignAddress;
-    const campaign = Campaign(address);
-    const summary = await campaign.methods.getSummary().call();
-
-    this.setState({
-      address: address,
-      minimumContribution: summary[0],
-      balance: summary[1],
-      requestsCount: summary[2],
-      approversCount: summary[3],
-      manager: summary[4],
-    });
+    // const address = this.props.match.params.campaignAddress;
+    // const campaign = Campaign(address);
+    // const summary = await campaign.methods.getSummary().call();
+    // this.setState({
+    //   address: address,
+    //   minimumContribution: summary[0],
+    //   balance: summary[1],
+    //   requestsCount: summary[2],
+    //   approversCount: summary[3],
+    //   manager: summary[4],
+    // });
   }
 
   renderCards() {
@@ -60,6 +60,8 @@ class CampaignShow extends Component {
       requestsCount,
       approversCount,
     } = this.state;
+
+    console.log('url', this.props.match);
 
     const items = [
       {
@@ -99,31 +101,35 @@ class CampaignShow extends Component {
   }
 
   render() {
-    const { match } = this.props;
-    const { state } = this.state;
+    const { url, path } = this.props.match;
+    const { address } = this.state;
     return (
       // <Layout>
       <div>
-        <h3>Campaign Show</h3>
+        <h3>Buy event</h3>
         <Grid>
+          <Grid.Row>
+            <Grid.Column>
+              {/* this will be nested route */}
+              {/* this path part must exactly by campaigns/${state.address} in the url */}
+              <Route path={path} exact>
+                {/* this wont be necessary  campaigns/${state.address} if it is already inside url*/}
+                {/* <Link to={`${match.url}/requests`}> */}
+                <Link to={`${url}/campaigns/${address}/requests`}>
+                  <a>
+                    <Button className='btn-purple' primary>
+                      View Requests
+                    </Button>
+                  </a>
+                </Link>
+              </Route>
+            </Grid.Column>
+          </Grid.Row>
           <Grid.Row>
             <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
 
             <Grid.Column width={6}>
-              <ContributeForm address={state.address} />
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column>
-              {/* this will be nested route */}
-              <Route path={match.path} exact>
-                <Link to={`${match.url}/campaigns/${state.address}/requests`}>
-                  <a>
-                    <Button primary>View Requests</Button>
-                  </a>
-                </Link>
-              </Route>
+              <ContributeForm address={address} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
