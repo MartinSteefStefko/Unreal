@@ -20,7 +20,7 @@ class AddPropertyComponent extends Component {
       imageFile: null,
       latitude: '',
       longitude: '',
-      minimumContribution: '',
+      minimumContribution: 0,
       errorMessage: '',
       loading: false,
       ethereum: {
@@ -31,6 +31,7 @@ class AddPropertyComponent extends Component {
       },
       requiredPropertyPrice: {
         czk: 0,
+        eth: 0,
       },
     };
   }
@@ -48,7 +49,7 @@ class AddPropertyComponent extends Component {
       longitude,
       image,
       minimumContribution,
-      suggestedPriceAtCreation,
+      requiredPropertyPrice,
       description,
     } = this.state;
     // event.preventDefault();
@@ -75,11 +76,18 @@ class AddPropertyComponent extends Component {
 
     try {
       const accounts = await web3.eth.getAccounts();
+      console.log('accounts', accounts);
+      console.log('minimumContribution,', minimumContribution);
+      console.log('requiredPropertyPrice.eth', requiredPropertyPrice.eth);
+      console.log('description', description);
+
       await factory.methods
         // .createCampaign(minimumContribution)
         .createCampaign(
           minimumContribution,
-          suggestedPriceAtCreation.ethereum,
+
+          requiredPropertyPrice.eth,
+
           description
         )
         .send({
@@ -121,6 +129,14 @@ class AddPropertyComponent extends Component {
     this.setState({
       requiredPropertyPrice: {
         czk: event.target.value,
+      },
+    });
+  };
+
+  requiredEthPriceHandler = async (event) => {
+    this.setState({
+      requiredPropertyPrice: {
+        eth: event.target.value,
       },
     });
   };
@@ -267,6 +283,7 @@ class AddPropertyComponent extends Component {
                     model='.priceEthereum'
                     id='priceEthereum'
                     name='priceEthereum'
+                    onChange={this.requiredEthPriceHandler}
                     placeholder={suggestedPriceAtCreation.ethereum * 1.05}
                     className='form-control'
                     validators={{
