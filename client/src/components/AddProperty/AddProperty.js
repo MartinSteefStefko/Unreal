@@ -73,6 +73,10 @@ class AddPropertyComponent extends Component {
       this.props.addProperty(val);
       this.props.resetAddPropertyForm();
     }
+    console.log(
+      'this.props.properties.addedProperty',
+      this.props.properties.addedProperty
+    );
 
     try {
       const accounts = await web3.eth.getAccounts();

@@ -3,16 +3,20 @@ import * as ActionTypes from './types';
 import { getCurrentUser } from './authActions';
 import { property_all } from '../../mocks/property_all';
 import { property_recent } from '../../mocks/property_recent';
+import { uploads_property } from '../../mocks/uploads_property';
 
 export const addProperty = (newProperty) => (dispatch) => {
-  axios
-    .post('http://localhost:5000/api/uploads/property', newProperty)
-    .then((response) => {
-      dispatch(addNewProperty(response.data));
-      dispatch(fetchRecentProperties());
-      alert('Property is successfully added');
-    })
-    .catch((error) => {});
+  const result = dispatch(addNewProperty(uploads_property));
+  console.log('result', result);
+  dispatch(fetchRecentProperties());
+  // axios
+  //   .post('http://localhost:5000/api/uploads/property', newProperty)
+  //   .then((response) => {
+  //     dispatch(addNewProperty(response.data));
+  //     dispatch(fetchRecentProperties());
+  //     alert('Property is successfully added');
+  //   })
+  //   .catch((error) => {});
 };
 export const fetchProperties = () => (dispatch) => {
   dispatch(propertiesLoading(true));
