@@ -121,6 +121,7 @@ class Main extends Component {
                 addImageToServer={this.props.addImageToServer}
                 resetAddPropertyForm={this.props.resetAddPropertyForm}
                 auth={this.props.auth}
+                addedProperty={this.props.properties.addedProperty}
               />
             )}
           />

@@ -11,6 +11,12 @@ export const uploads_property = {
   image: 'Praha1.png',
   price: '5250000',
   priceUnit: 'CZK',
+  minimumContribution: '100',
+  minimumContributionUnit: 'Wei',
+  requiredPropertyPrice: {
+    eth: '60',
+  },
+  requiredPropertyPriceUnit: 'ETH',
   area: '42',
   areaUnit: 'm2',
   contact: 'Ing. Martin Stefko',

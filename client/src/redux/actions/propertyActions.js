@@ -4,11 +4,15 @@ import { getCurrentUser } from './authActions';
 import { property_all } from '../../mocks/property_all';
 import { property_recent } from '../../mocks/property_recent';
 import { uploads_property } from '../../mocks/uploads_property';
+import factory from '../../ethereum/factory';
+import web3 from '../../ethereum/web3';
 
-export const addProperty = (newProperty) => (dispatch) => {
+export const addProperty = (newProperty) => async (dispatch) => {
   const result = dispatch(addNewProperty(uploads_property));
-  console.log('result', result);
+  addCampaign(result);
+  console.log('result', result.payload);
   dispatch(fetchRecentProperties());
+
   // axios
   //   .post('http://localhost:5000/api/uploads/property', newProperty)
   //   .then((response) => {
@@ -18,6 +22,42 @@ export const addProperty = (newProperty) => (dispatch) => {
   //   })
   //   .catch((error) => {});
 };
+// export const addCampaign = (result) => async (dispatch) => {
+export const addCampaign = async (result) => {
+  // dispatch(myPropertiesLoading(true));
+  // axios
+  //   .get(`http://localhost:5000/api/property/my/${email}`)
+  //   .then((res) => {
+  //     if (res.status === 200) {
+  //       dispatch(addMyProperties(res.data));
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     dispatch(myPropertiesFailed(err.message));
+  //   });
+  const { minimumContribution, requiredPropertyPrice, _id } = result.payload;
+
+  console.log('minimumContribution,', minimumContribution);
+  console.log('requiredPropertyPrice.eth', requiredPropertyPrice.eth);
+  console.log('_id', _id);
+  // this is working
+  try {
+    const accounts = await web3.eth.getAccounts();
+    console.log('accounts', accounts);
+
+    await factory.methods
+      .createCampaign(minimumContribution, requiredPropertyPrice.eth, _id)
+      .send({
+        from: accounts[0],
+      });
+
+    // Router.pushRoute('/');
+  } catch (err) {
+    throw err;
+    // this.setState({ errorMessage: err.message });
+  }
+};
+
 export const fetchProperties = () => (dispatch) => {
   dispatch(propertiesLoading(true));
   dispatch(addProperties(property_all));

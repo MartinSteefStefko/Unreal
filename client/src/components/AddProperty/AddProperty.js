@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Button, Label, Col, Row } from 'reactstrap';
 
-import factory from '../../ethereum/factory';
-import web3 from '../../ethereum/web3';
+// import factory from '../../ethereum/factory';
+// import web3 from '../../ethereum/web3';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -50,7 +50,6 @@ class AddPropertyComponent extends Component {
       image,
       minimumContribution,
       requiredPropertyPrice,
-      description,
     } = this.state;
     // event.preventDefault();
     this.setState({ loading: true, errorMessage: '' });
@@ -65,6 +64,10 @@ class AddPropertyComponent extends Component {
         latitude: latitude,
         longitude: longitude,
         email: this.props.auth.user.email,
+        minimumContribution: minimumContribution,
+        minimumContributionUnit: 'Wei',
+        requiredPropertyPrice: requiredPropertyPrice,
+        requiredPropertyPriceUnit: 'ETH',
       };
       const formData = new FormData();
       formData.append('image', imageFile);
@@ -72,35 +75,6 @@ class AddPropertyComponent extends Component {
 
       this.props.addProperty(val);
       this.props.resetAddPropertyForm();
-    }
-    console.log(
-      'this.props.properties.addedProperty',
-      this.props.properties.addedProperty
-    );
-
-    try {
-      const accounts = await web3.eth.getAccounts();
-      console.log('accounts', accounts);
-      console.log('minimumContribution,', minimumContribution);
-      console.log('requiredPropertyPrice.eth', requiredPropertyPrice.eth);
-      console.log('description', description);
-
-      await factory.methods
-        // .createCampaign(minimumContribution)
-        .createCampaign(
-          minimumContribution,
-
-          requiredPropertyPrice.eth,
-
-          description
-        )
-        .send({
-          from: accounts[0],
-        });
-
-      // Router.pushRoute('/');
-    } catch (err) {
-      this.setState({ errorMessage: err.message });
     }
 
     this.setState({ loading: false });
