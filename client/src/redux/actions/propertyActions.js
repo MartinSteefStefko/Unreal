@@ -9,9 +9,7 @@ import web3 from '../../ethereum/web3';
 
 export const addProperty = (newProperty) => async (dispatch) => {
   const campaign = await addCampaign(uploads_property);
-  console.log('campaign', campaign);
   const updatedProperty = { ...uploads_property, campaign };
-  console.log('updatedProperty', updatedProperty);
   const result = dispatch(addNewProperty(updatedProperty));
   console.log('result', result);
 
@@ -40,11 +38,6 @@ export const addCampaign = async (result) => {
   //     dispatch(myPropertiesFailed(err.message));
   //   });
   const { minimumContribution, requiredPropertyPrice, _id } = result;
-
-  console.log('minimumContribution,', minimumContribution);
-  console.log('requiredPropertyPrice.eth', requiredPropertyPrice.eth);
-  console.log('_id', _id);
-
   try {
     const accounts = await web3.eth.getAccounts();
 
@@ -53,7 +46,6 @@ export const addCampaign = async (result) => {
       .send({
         from: accounts[0],
       });
-    console.log('res', res);
     const campaign = {
       address: web3.eth.abi.decodeParameter(
         'address',

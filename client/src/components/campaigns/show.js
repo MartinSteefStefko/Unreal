@@ -35,24 +35,22 @@ class CampaignShow extends Component {
     viewRequests: false,
   };
 
-  // const match = useRouteMatch();
-  // const params = useParams();
-
-  // const { quoteId } = params;
-
-  // async componentDidMount() {
-  // const address = this.props.match.params.campaignAddress;
-  // const campaign = Campaign(address);
-  // const summary = await campaign.methods.getSummary().call();
-  // this.setState({
-  //   address: address,
-  //   minimumContribution: summary[0],
-  //   balance: summary[1],
-  //   requestsCount: summary[2],
-  //   approversCount: summary[3],
-  //   manager: summary[4],
-  // });
-  // }
+  async componentDidMount() {
+    const address = this.props.property.campaign.address;
+    console.log('address', address);
+    const campaign = Campaign(address);
+    console.log('campaign', campaign);
+    const summary = await campaign.methods.getSummary().call();
+    console.log('summary', summary);
+    this.setState({
+      address: address,
+      minimumContribution: summary[0],
+      balance: summary[1],
+      requestsCount: summary[2],
+      approversCount: summary[3],
+      manager: summary[4],
+    });
+  }
 
   onClickHandler = (event) => {
     event.preventDefault();

@@ -302,7 +302,7 @@ class PropertyDetailComponent extends Component {
                 </div>
                 <hr />
                 <div className='col-12 col-md-4 pl-5'>
-                  <CampaignShow />
+                  <CampaignShow property={this.props.property} />
                 </div>
               </div>
             </div>
