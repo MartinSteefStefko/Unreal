@@ -9,8 +9,8 @@ import web3 from '../../ethereum/web3';
 
 export const addProperty = (newProperty) => async (dispatch) => {
   const result = dispatch(addNewProperty(uploads_property));
-  addCampaign(result);
-  console.log('result', result.payload);
+  const contractAddress = addCampaign(result);
+  console.log('contractAddress', contractAddress);
   dispatch(fetchRecentProperties());
 
   // axios
@@ -43,13 +43,22 @@ export const addCampaign = async (result) => {
   // this is working
   try {
     const accounts = await web3.eth.getAccounts();
-    console.log('accounts', accounts);
 
-    await factory.methods
+    const res = await factory.methods
       .createCampaign(minimumContribution, requiredPropertyPrice.eth, _id)
       .send({
         from: accounts[0],
-      });
+      })
+      .on('receipt', (receipt) => console.log(receipt));
+    const campaignAddress = {
+      campaignAddress: web3.eth.abi.decodeParameter(
+        'address',
+        res.events[0].raw.data
+      ),
+    };
+    console.log('campaignAddress', campaignAddress);
+
+    return res;
 
     // Router.pushRoute('/');
   } catch (err) {

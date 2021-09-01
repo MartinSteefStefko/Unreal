@@ -1,19 +1,23 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.21;
 
 contract CampaignFactory {
     address[] public deployedCampaigns;
+    event campaignDeployed (address campaignAddress);
 
     function createCampaign(uint minimum, uint campaignLimit, string propertyId) public {
         address newCampaign = new Campaign(minimum, msg.sender, campaignLimit, propertyId );
         deployedCampaigns.push(newCampaign);
+        emit campaignDeployed(newCampaign);
     }
 
     function getDeployedCampaigns() public view returns (address[]) {
         return deployedCampaigns;
     }
+    
 }
 
 contract Campaign {
+    
     struct Request {
         string description;
         uint value;
@@ -21,9 +25,11 @@ contract Campaign {
         bool complete;
         uint approvalCount;
         mapping(address => bool) approvals;
+        
     }
 
     Request[] public requests;
+    mapping (string => address) propertyReferences;
     address public manager;
     uint public minimumContribution;
     mapping(address => bool) public approvers;
@@ -41,12 +47,13 @@ contract Campaign {
         minimumContribution = minimum;
         campaignLimit = limit;
         propertyId = id;
+        propertyReferences[propertyId]=address(this);
     }
 
     function contribute() public payable {
         require(msg.value > minimumContribution);
         require(msg.value <= campaignLimit);
-        require(this.balance <= campaignLimit);
+        require(address(this).balance <= campaignLimit);
 
         approvers[msg.sender] = true;
         approversCount++;
@@ -89,7 +96,7 @@ contract Campaign {
       ) {
         return (
           minimumContribution,
-          this.balance,
+          address(this).balance,
           requests.length,
           approversCount,
           manager,
@@ -100,5 +107,10 @@ contract Campaign {
 
     function getRequestsCount() public view returns (uint) {
         return requests.length;
+    }
+    
+    function getAddressFromPropertyId(string propertyId) public view returns(address){
+        return( propertyReferences[propertyId]);
+        
     }
 }
