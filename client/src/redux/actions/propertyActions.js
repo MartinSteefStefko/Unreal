@@ -8,9 +8,13 @@ import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 
 export const addProperty = (newProperty) => async (dispatch) => {
-  const result = dispatch(addNewProperty(uploads_property));
-  const contractAddress = addCampaign(result);
-  console.log('contractAddress', contractAddress);
+  const campaign = await addCampaign(uploads_property);
+  console.log('campaign', campaign);
+  const updatedProperty = { ...uploads_property, campaign };
+  console.log('updatedProperty', updatedProperty);
+  const result = dispatch(addNewProperty(updatedProperty));
+  console.log('result', result);
+
   dispatch(fetchRecentProperties());
 
   // axios
@@ -35,12 +39,12 @@ export const addCampaign = async (result) => {
   //   .catch((err) => {
   //     dispatch(myPropertiesFailed(err.message));
   //   });
-  const { minimumContribution, requiredPropertyPrice, _id } = result.payload;
+  const { minimumContribution, requiredPropertyPrice, _id } = result;
 
   console.log('minimumContribution,', minimumContribution);
   console.log('requiredPropertyPrice.eth', requiredPropertyPrice.eth);
   console.log('_id', _id);
-  // this is working
+
   try {
     const accounts = await web3.eth.getAccounts();
 
@@ -48,17 +52,15 @@ export const addCampaign = async (result) => {
       .createCampaign(minimumContribution, requiredPropertyPrice.eth, _id)
       .send({
         from: accounts[0],
-      })
-      .on('receipt', (receipt) => console.log(receipt));
-    const campaignAddress = {
-      campaignAddress: web3.eth.abi.decodeParameter(
+      });
+    console.log('res', res);
+    const campaign = {
+      address: web3.eth.abi.decodeParameter(
         'address',
-        res.events[0].raw.data
+        res.events.campaignDeployed.raw.data
       ),
     };
-    console.log('campaignAddress', campaignAddress);
-
-    return res;
+    return campaign;
 
     // Router.pushRoute('/');
   } catch (err) {
