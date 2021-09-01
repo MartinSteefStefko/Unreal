@@ -49,6 +49,7 @@ class CampaignShow extends Component {
       requestsCount: summary[2],
       approversCount: summary[3],
       manager: summary[4],
+      requiredPrice: summary[5],
     });
   }
 
@@ -66,6 +67,7 @@ class CampaignShow extends Component {
       minimumContribution,
       requestsCount,
       approversCount,
+      requiredPrice,
     } = this.state;
 
     console.log('url', this.props.match);
@@ -79,7 +81,7 @@ class CampaignShow extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: minimumContribution,
+        header: `${minimumContribution} Wei`,
         meta: 'Minimum Contribution (wei)',
         description:
           'You must contribute at least this much wei to become an approver',
@@ -97,10 +99,16 @@ class CampaignShow extends Component {
           'Number of people who have already donated to this campaign',
       },
       {
-        header: web3.utils.fromWei(balance, 'ether'),
+        header: `${web3.utils.fromWei(balance, 'ether')} ETH`,
         meta: 'Campaign Balance (ether)',
         description:
           'The balance is how much money this campaign has left to spend.',
+      },
+      {
+        header: `${requiredPrice} ETH`,
+        meta: 'Required price (ETH)',
+        description:
+          'Price that property owner requires to sell his/her property',
       },
     ];
 
