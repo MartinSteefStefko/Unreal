@@ -74,6 +74,18 @@ class CampaignShow extends Component {
 
     const items = [
       {
+        header: `${requiredPrice} ETH`,
+        meta: 'Required price (ETH)',
+        description:
+          'Price that property owner requires to sell his/her property',
+      },
+      {
+        header: `${web3.utils.fromWei(balance, 'ether')} ETH`,
+        meta: 'Campaign Balance (ether)',
+        description:
+          'The balance is how much money this campaign has left to spend.',
+      },
+      {
         header: manager,
         meta: 'Address of Manager',
         description:
@@ -97,18 +109,6 @@ class CampaignShow extends Component {
         meta: 'Number of Approvers',
         description:
           'Number of people who have already donated to this campaign',
-      },
-      {
-        header: `${web3.utils.fromWei(balance, 'ether')} ETH`,
-        meta: 'Campaign Balance (ether)',
-        description:
-          'The balance is how much money this campaign has left to spend.',
-      },
-      {
-        header: `${requiredPrice} ETH`,
-        meta: 'Required price (ETH)',
-        description:
-          'Price that property owner requires to sell his/her property',
       },
     ];
 

@@ -23,6 +23,9 @@ export const property_all = [
       coordinates: [50.013039, 14.44382],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
   {
     _id: '56cb91bdc3464f14678934cc',
@@ -48,6 +51,9 @@ export const property_all = [
       coordinates: [50.037827, 14.518547],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
   {
     _id: '56cb91bdc3464f14678934cd',
@@ -73,6 +79,9 @@ export const property_all = [
       coordinates: [50.079671, 14.487163],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
 
   {
@@ -99,6 +108,9 @@ export const property_all = [
       coordinates: [49.166913, 16.578595],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
   {
     _id: '56cb91bdc3464f14678934cg',
@@ -124,5 +136,8 @@ export const property_all = [
       coordinates: [49.198524, 16.593917],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
 ];

@@ -23,6 +23,9 @@ export const property_recent = [
       coordinates: [14.44382, 50.013039],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
   {
     _id: '56cb91bdc3464f14678934cc',
@@ -48,6 +51,9 @@ export const property_recent = [
       coordinates: [14.518547, 50.037827],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
   {
     _id: '56cb91bdc3464f14678934cd',
@@ -73,5 +79,8 @@ export const property_recent = [
       coordinates: [50.079671, 14.487163],
     },
     date: Date.now(),
+    campaign: {
+      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+    },
   },
 ];

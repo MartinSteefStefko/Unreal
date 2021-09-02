@@ -48,7 +48,12 @@ class ContributeForm extends Component {
           />
         </Form.Field>
 
-        <Message error header='Oops!' content={this.state.errorMessage} />
+        <Message
+          error
+          header='Oops!'
+          style={{ maxWidth: '100px' }}
+          content={this.state.errorMessage}
+        />
         <Button
           className='btn-purple '
           size='lg'
