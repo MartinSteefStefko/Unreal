@@ -9,7 +9,9 @@ const Footer = (props) => (
         <div className='col-md-3 col-12 text-center'>
           <Link to='/' className='footer-logo'>
             <h4>
-              <span className='fa fa-home fa-lg'> Unreal</span>
+              <span className=''>
+                <b>{`:::`} Unreal</b>
+              </span>
             </h4>
           </Link>
         </div>

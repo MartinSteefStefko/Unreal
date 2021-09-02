@@ -74,7 +74,9 @@ class HeaderComponent extends Component {
       <Fragment>
         <Navbar light expand='md'>
           <NavLink to='/' className='navbar-brand'>
-            <span className='fa fa-home fa-lg'> Unreal</span>
+            <span className=''>
+              <b>{`:::`} Unreal</b>
+            </span>
           </NavLink>
           <NavbarToggler onClick={this.toggleNav} />
           <Collapse isOpen={this.state.isNavOpen} navbar>
@@ -124,7 +126,12 @@ class HeaderComponent extends Component {
               )}
 
               <Link to='/list'>
-                <Button className='btn btn-purple'>List Properties</Button>
+                <Button className='btn btn-purple mr-1'>List Properties</Button>
+              </Link>
+              <Link to='/property/add'>
+                <Button outline className='btn'>
+                  Add Property
+                </Button>
               </Link>
             </Nav>
           </Collapse>
