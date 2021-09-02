@@ -143,7 +143,7 @@ class Main extends Component {
           />
           <Redirect to='/' />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

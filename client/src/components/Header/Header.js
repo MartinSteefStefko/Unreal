@@ -72,7 +72,7 @@ class HeaderComponent extends Component {
   render() {
     return (
       <Fragment>
-        <Navbar dark expand='md'>
+        <Navbar light expand='md'>
           <NavLink to='/' className='navbar-brand'>
             <span className='fa fa-home fa-lg'> Unreal</span>
           </NavLink>

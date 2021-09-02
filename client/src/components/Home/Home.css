@@ -16,6 +16,22 @@
 .text{
     font-size: 2vw;
 }
+.carouselWrapper{
+        background-image: url("/background.jpg");
+        background-size: 40% auto;
+        background-repeat: no-repeat;
+        background-position:90%;
+        background-color: rgba(253, 111, 111, 0.2);
+        /* opacity: 0.6; */
+}
+.carousel-text-wrapper{
+    height: 50%;
+    width: 50%;
+    background-color: #fff
+}
+.carousel-text{
+    color:rgb(70, 70, 70)
+}
 
 @media only screen and (max-width: 768px) {
     .home-title{

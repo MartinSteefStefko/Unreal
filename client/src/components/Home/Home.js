@@ -104,23 +104,32 @@ class Home extends Component {
           <div className='text-white'>
             <div className='container pt-5'>
               <div className='row mt-5 '>
-                <div className='col-12 col-md p-5 text-center'>
-                  <h1 className='home-title'>{`Choose from ${600} dream realitites!`}</h1>
-                  <h2 className='home-subtitle'>
-                    {`Buy them with blockchain for as little as  ${`100$`} `}
-                  </h2>
-                  <Link to='/list' className='btn btn-purple btn-md mt-3'>
+                <div className='col-12 col-md p-5 text-center carouselWrapper'>
+                  {/* <a href='https://www.vecteezy.com/free-vector/woman'>
+                    Woman Vectors by Vecteezy
+                  </a> */}
+                  {/* <h1 className='home-title'>{`Choose from ${600} dream realitites!`}</h1> */}
+                  <div className='carousel-text-wrapper'>
+                    <h2 className='carousel-text pt-4'>
+                      {`Buy properties with blockchain for as little as  ${`100 Wei`} `}
+                    </h2>
+                  </div>
+
+                  <Link to='/list' className='btn btn-purple btn-lg mt-5 mb-4'>
                     Check Out
                   </Link>
+                  <hr />
                 </div>
               </div>
             </div>
+            <br />
+            <hr />
             <div className='container'>
               <div className='row mt-2'>
                 <div className='col-6 col-md-3 '>
                   <div className='card'>
                     <div className='card-title link-green text-center p-2'>
-                      <h3 className='text'>Property Purpose</h3>
+                      <h3 className=''>Property Purpose</h3>
                     </div>
                     <div className='card-body text-dark text-center'>
                       <p>
@@ -141,7 +150,7 @@ class Home extends Component {
                 <div className='col-6 col-md-3 '>
                   <div className='card'>
                     <div className='card-title link-green text-center p-2'>
-                      <h3 className='text'>Cities</h3>
+                      <h3 className=''>Cities</h3>
                     </div>
                     <div className='card-body text-dark text-center'>
                       <p>
@@ -163,11 +172,11 @@ class Home extends Component {
             </div>
             <div className='row mt-5 bg-green'>
               <div className='col-12 col-md p-2 text-center'>
-                <h3 className='home-subtitle'>Recently Listed Properties</h3>
-                <p>Checkout Latest Listed Properties for sale and rent</p>
+                <h4 className=''>Recently Listed Properties</h4>
               </div>
             </div>
           </div>
+          <hr />
 
           <div className='container mt-5'>
             <div className='row'>
