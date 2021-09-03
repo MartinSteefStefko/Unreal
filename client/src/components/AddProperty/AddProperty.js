@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import web3 from '../../ethereum/web3';
+import { withRouter } from 'react-router';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Button, Label, Col, Row } from 'reactstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -15,29 +15,27 @@ const minLength = (len) => (val) => !val || val.length >= len;
 const isNumber = (val) => !isNaN(Number(val));
 
 class AddPropertyComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      description: '',
-      image: '',
-      imageFile: null,
-      latitude: '',
-      longitude: '',
-      minimumContribution: 0,
-      errorMessage: '',
-      loading: false,
-      ethereum: {
-        czk: 0,
-      },
-      suggestedPriceAtCreation: {
-        ethereum: 0,
-      },
-      requiredPropertyPrice: {
-        czk: 0,
-        eth: 0,
-      },
-    };
-  }
+  state = {
+    description: '',
+    image: '',
+    imageFile: null,
+    latitude: '',
+    longitude: '',
+    minimumContribution: 0,
+    errorMessage: '',
+    loading: false,
+    ethereum: {
+      czk: 0,
+    },
+    suggestedPriceAtCreation: {
+      ethereum: 0,
+    },
+    requiredPropertyPrice: {
+      czk: 0,
+      eth: 0,
+    },
+  };
+
   componentDidMount() {
     this.props.resetAddPropertyForm();
 
@@ -77,11 +75,13 @@ class AddPropertyComponent extends Component {
       formData.append('image', imageFile);
       this.props.addImageToServer(formData);
 
-      this.props.addProperty(val);
+      const result = await this.props.addProperty(val);
+      // if (result) {
+      this.props.history.push('/list');
       this.props.resetAddPropertyForm();
+      this.setState({ loading: false });
+      // }
     }
-
-    this.setState({ loading: false });
   };
 
   requiredPriceHandler = (event) => {
@@ -588,4 +588,4 @@ class AddPropertyComponent extends Component {
   }
 }
 
-export default AddPropertyComponent;
+export default withRouter(AddPropertyComponent);

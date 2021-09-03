@@ -8,12 +8,13 @@ import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 
 export const addProperty = (newProperty) => async (dispatch) => {
-  const campaign = await addCampaign(uploads_property);
+  // const campaign = await addCampaign(uploads_property);
+  const campaign = await addCampaign(uploads_property, newProperty);
   const updatedProperty = { ...uploads_property, campaign };
   const result = dispatch(addNewProperty(updatedProperty));
   console.log('result', result);
 
-  dispatch(fetchRecentProperties());
+  // dispatch(fetchRecentProperties());
 
   // axios
   //   .post('http://localhost:5000/api/uploads/property', newProperty)
@@ -25,19 +26,12 @@ export const addProperty = (newProperty) => async (dispatch) => {
   //   .catch((error) => {});
 };
 // export const addCampaign = (result) => async (dispatch) => {
-export const addCampaign = async (result) => {
-  // dispatch(myPropertiesLoading(true));
-  // axios
-  //   .get(`http://localhost:5000/api/property/my/${email}`)
-  //   .then((res) => {
-  //     if (res.status === 200) {
-  //       dispatch(addMyProperties(res.data));
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     dispatch(myPropertiesFailed(err.message));
-  //   });
-  const { minimumContribution, requiredPropertyPrice, _id } = result;
+export const addCampaign = async (result, newProperty) => {
+  console.log('newProperty', newProperty);
+
+  const { minimumContribution, requiredPropertyPrice } = newProperty;
+  const { _id } = result;
+
   try {
     const accounts = await web3.eth.getAccounts();
 
@@ -63,6 +57,17 @@ export const addCampaign = async (result) => {
     throw err;
     // this.setState({ errorMessage: err.message });
   }
+  // dispatch(myPropertiesLoading(true));
+  // axios
+  //   .get(`http://localhost:5000/api/property/my/${email}`)
+  //   .then((res) => {
+  //     if (res.status === 200) {
+  //       dispatch(addMyProperties(res.data));
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     dispatch(myPropertiesFailed(err.message));
+  //   });
 };
 
 export const fetchProperties = () => (dispatch) => {
