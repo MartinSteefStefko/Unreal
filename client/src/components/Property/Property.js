@@ -87,7 +87,7 @@ class PropertyComponent extends Component {
               <div className=''>
                 <div className=''>
                   <div className='card-property-address'>
-                    {property.address}
+                    {property.address}, {property.city}
                   </div>
                 </div>
                 <div className=''>{`${property.area} ${property.areaUnit}`}</div>

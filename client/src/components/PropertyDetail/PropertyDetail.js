@@ -85,7 +85,9 @@ class PropertyDetailComponent extends Component {
                   />
                   <div className='col-12 pt-4'>
                     <h2>{property.propertytitle} </h2>
-                    <h4>{property.address}</h4>
+                    <h4>
+                      {property.address}, {property.city}
+                    </h4>
                     <h3>
                       {`${parseFloat(property.price)
                         .toFixed(2)
