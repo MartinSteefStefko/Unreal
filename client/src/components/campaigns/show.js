@@ -43,11 +43,11 @@ class CampaignShow extends Component {
     this.setState({
       address: address,
       minimumContribution: summary[0],
-      balance: summary[1],
+      balance: web3.utils.fromWei(summary[1], 'ether'),
       requestsCount: summary[2],
       approversCount: summary[3],
       manager: summary[4],
-      requiredPrice: summary[5],
+      requiredPrice: web3.utils.fromWei(summary[5], 'ether'),
     });
   }
 
@@ -68,17 +68,15 @@ class CampaignShow extends Component {
       requiredPrice,
     } = this.state;
 
-    console.log('url', this.props.match);
-
     const items = [
       {
-        header: `${web3.utils.fromWei(requiredPrice, 'ether')} ETH`,
+        header: `${requiredPrice} ETH`,
         meta: 'Required price (ETH)',
         description:
           'Price that property owner requires to sell his/her property',
       },
       {
-        header: `${web3.utils.fromWei(balance, 'ether')} ETH`,
+        header: `${balance} ETH`,
         meta: 'Campaign Balance (ether)',
         description: 'The balance is the portion of property that is bought  .',
       },
@@ -152,7 +150,10 @@ class CampaignShow extends Component {
                 <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
 
                 <Grid.Column width={6}>
-                  <ContributeForm address={address} />
+                  <ContributeForm
+                    address={address}
+                    requiredPrice={this.state.requiredPrice}
+                  />
                 </Grid.Column>
               </Grid.Row>
             </div>

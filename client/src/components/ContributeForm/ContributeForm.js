@@ -42,13 +42,13 @@ class ContributeForm extends Component {
       <div>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Amount to Buy</label>
+            <label>Buy part of/whole property for</label>
             <Input
               value={this.state.value}
               onChange={(event) => this.setState({ value: event.target.value })}
               label='ether'
               labelPosition='right'
-              placeholder={`max. ${'propertyPriceAtCreation.ethereum'}`}
+              placeholder={`Max ${this.props.requiredPrice} ETH`}
             />
           </Form.Field>
           <Message
