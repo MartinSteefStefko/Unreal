@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Button } from 'reactstrap';
 import { Form, Input, Message } from 'semantic-ui-react';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -27,13 +28,13 @@ class ContributeForm extends Component {
         from: accounts[0],
         value: web3.utils.toWei(this.state.value, 'ether'),
       });
+      this.setState({ loading: false, value: '' });
+      this.props.history.push(`/property/${this.props.match.params.id}`);
 
       // Router.replaceRoute(`/campaigns/${this.props.address}`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
-
-    this.setState({ loading: false, value: '' });
   };
 
   render() {
@@ -73,4 +74,4 @@ class ContributeForm extends Component {
   }
 }
 
-export default ContributeForm;
+export default withRouter(ContributeForm);

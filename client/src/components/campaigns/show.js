@@ -80,8 +80,7 @@ class CampaignShow extends Component {
       {
         header: `${web3.utils.fromWei(balance, 'ether')} ETH`,
         meta: 'Campaign Balance (ether)',
-        description:
-          'The balance is how much money this campaign has left to spend.',
+        description: 'The balance is the portion of property that is bought  .',
       },
       {
         header: manager,
