@@ -1,25 +1,54 @@
-##Real Estate App
-**Features**
 
-Following are the main features of this app:
 
-* User Authentication.
-* Adding / Removing Properties.
-* Viewing Properties.
-* Filtering Properties by city and by sale/rent.
-* Searching Properties.
-* Listing Recently added properties.
-* Contacting owner by email.
-* Viewing Property's location on Map.
+![StrongFaculty](/client/public/images/sf-logo.png)
+# Strong Faculty
 
-**Tools and Technologies**
+> Real estate tokenization app, built in React, Redux, Node.js, MongoDb & Solidity
 
-Following Tools and Technologies are used in development
 
-* Node.js
-* Express.js
-* React.js
-* MongoDB
-* Redux
-* Reactstrap
-* Passport.js
+
+
+## Local installation 
+
+Ubuntu/Debian:
+
+```sh
+sudo apt update
+git clone https://github.com/MartinStefko/Unreal.git
+```
+
+
+```
+
+Start the app
+
+```sh
+cd client
+npm start
+```
+
+## Usage example
+
+Start the app and go to the http://localhost:3000/.
+
+
+## Release History
+
+* 0.0.1
+    * Routing, data mocking, initial ui, Ethereum smart contract campaign creation,data fetching and buying of part/whole property
+
+
+## Meta
+
+Distributed under the MIT license. See ``LICENSE`` for more information.
+
+[https://github.com/StrongFaculty)
+
+
+## Contributing
+
+1. Fork it (<https://github.com/MartinStefko/Unreal>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
