@@ -1,13 +1,15 @@
 export const property_recent = [
   {
     _id: '56cb91bdc3464f14678934cb',
-    propertytitle: 'Prodej bytu 2+1 54 m²',
+    propertytitle: 'For sale apartment 2+1 54 m²',
     for: 'Sale',
     bedrooms: '2',
     bathrooms: '1',
     garage: false,
     lounge: false,
     description:
+      'Nice, spacious apartment 2 + 1 after complete reconstruction in a maintained, insulated house on the edge of the Kamýk housing estate, close to the Kamýk forest park. The apartment is on the third floor of six floors with an elevator with wheelchair access. The apartment has undergone a successful reconstruction, bathroom with shower, separate toilet, kitchen 8.5 m2, living room 17 m2, bedroom 16.8 m2, hallway with built-in wardrobes 8.2 m2. Corner kitchen with combined stove. The apartment includes the exclusive use of the loggia in the hallway of the house under lock. Insulated house, new roof, elevators with wheelchair access. In the vicinity of all amenities, good public transport connections, (near the planned metro station D) Low monthly fees. Annuity paid. A mortgage is possible in case of the possibility of guaranteeing another property. For a possible tour, send me an e-mail with a contact, I arrange the tours in the order of incoming e-mails.',
+    descriptionCZ:
       'Pěkný, prostorný byt 2+1 po kompletní rekonstrukci v udržovaném, zatepleném domě na okraji sídliště Kamýk, v těsné blízkosti lesoparku Kamýk. Byt je ve třetím podlaží z šesti pater s výtahem s bezbarierovým přístupem. Byt prošel zdařilou rekonstrukcí, koupelna se sprchovým koutem, samostatné wc, kuchyně 8,5m2, obyvák 17m2, ložnice 16,8m2, chodba s vestavnými skříněmi 8,2m2. Rohová kuchyňská linka s kombinovaným sporákem. K bytu patří výhradní užívání lodžie na chodbě domu pod uzamčením. Zateplený dům, nová střecha, výtahy s bezbarierovým přístupem. V okolí veškerá vybavenost, dobré spojení mhd, (blízko plánované stanice metra D) Nízké měsíční poplatky. Anuita splacena. Hypotéka je možná v případě možnosti ručení jinou nemovitostí. Pro případnou prohlídku mi zašlete mail s kontaktem, prohlídky domlouvám v pořadí příchozích mailů.',
     image: 'Praha2.png',
     price: '5146000',
@@ -17,10 +19,10 @@ export const property_recent = [
     contact: 'Ing. Martin Stefko',
     email: 'mato.stefko@gmail.com',
     address: 'Šatrova',
-    city: 'Praha',
+    city: 'Prague',
     location: {
       type: 'Point',
-      coordinates: [14.44382, 50.013039],
+      coordinates: [50.013039, 14.44382],
     },
     date: Date.now(),
     campaign: {
@@ -29,13 +31,15 @@ export const property_recent = [
   },
   {
     _id: '56cb91bdc3464f14678934cc',
-    propertytitle: 'Prodej bytu 3+1 60 m²',
+    propertytitle: 'For sale apartment 3+1 60 m²',
     for: 'Sale',
     bedrooms: '2',
     bathrooms: '1',
     garage: false,
     lounge: false,
     description:
+      'We offer for sale a studio in personal ownership with a net floor area of 60 square meters. The layout of the studio is a spacious entrance hall, kitchen, bathroom with corner bath and toilet and three rooms. Unit No. 797/28 has undergone a partial reconstruction (new kitchen, floors ..). Central heating, distribution of hot and cold water. It is possible to build a separate entrance to the studio from the side of the house. Unit No. 797/28 is managed as another non-residential space. In the vicinity of all civic amenities and full of greenery.',
+    descriptionCZ:
       'Nabízíme k prodeji atelier v osobním vlastnictví o čisté podlahové ploše 60m2. Atelier je dispozičně řešen prostornou vstupní halou, kuchyní, koupelnou s rohovou vanou a WC a třemi pokoji. Jednotka č. 797/28 prošla částečnou rekonstrukcí (nová kuchyňská linka, podlahy..). Topení ústřední, rozvod teplé a studené vody. Do atelieru je možné vybudovat samostatný vchod ze strany domu. Jednotka č. 797/28 je vedena jako jiný nebytový prostor. V okolí veškerá občanská vybavenost a plno zeleně.',
     image: 'Praha3.png',
     price: '4990000',
@@ -45,10 +49,10 @@ export const property_recent = [
     contact: 'Ing. Martin Stefko',
     email: 'mato.stefko@gmail.com',
     address: 'Matúškova',
-    city: 'Praha',
+    city: 'Prague',
     location: {
       type: 'Point',
-      coordinates: [14.518547, 50.037827],
+      coordinates: [50.037827, 14.518547],
     },
     date: Date.now(),
     campaign: {
@@ -57,13 +61,15 @@ export const property_recent = [
   },
   {
     _id: '56cb91bdc3464f14678934cd',
-    propertytitle: 'Pronájem bytu 2+kk 57 m²',
+    propertytitle: 'For rent apartment 2+kk 57 m²',
     for: 'Rent',
     bedrooms: '2',
     bathrooms: '1',
     garage: false,
     lounge: true,
     description:
+      'Our company will arrange the rental of a bright apartment in 2 + kk with a size of 50 m2 with a balcony of 7 m2. The apartment is located on the 3rd floor. buildings with a total of 4th floor. The apartment is fully equipped (bed, sofa, TV table, wardrobes), in the photos without furniture. The apartment has a living room with kitchenette equipped with built-in appliances and a bedroom. Both rooms are accessible from the hallway and both have access to a south-facing balcony. The apartment also has a bathroom with sink and bathtub, separate toilet and a large walk-in closet with storage space. Excellent access to public transport - tram stop 4 min. walk. Contact us for more information and a tour. Ev. number: 621405.',
+    descriptionCZ:
       'Naše společnost Vám zprostředkuje pronájem světlého bytu v 2+kk o velikosti 50 m² s balkonem 7m². Byt v se nachází na 3 NP. budovy s celkem 4.NP. Byt je kompletně vybaven (postel, sedačka, televizní stoleček, skříně), na fotografiích bez nábytku. V bytě obývací pokoj s kuchyňským koutem vybaveným vestavěnými spotřebiči a ložnice. Obě místnosti jsou přístupné z chodby a obě mají výstup na balkon orientovaný na jih. V bytě dále koupelna s umyvadlem a vanou, oddělená toaleta a velká šatna s úložnými prostory. Výborná dostupnost na MHD - zastávka tramvaje 4 min. chůze. Pro více informací a prohlídku nás kontaktujte. Ev. číslo: 621405.',
     image: 'Praha4.png',
     price: '14500',
@@ -73,7 +79,7 @@ export const property_recent = [
     contact: 'Ing. Martin Stefko',
     email: 'mato.stefko@gmail.com',
     address: 'Janýrova',
-    city: 'Praha',
+    city: 'Prague',
     location: {
       type: 'Point',
       coordinates: [50.079671, 14.487163],

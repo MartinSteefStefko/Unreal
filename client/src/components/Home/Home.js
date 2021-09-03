@@ -154,9 +154,9 @@ class Home extends Component {
                     </div>
                     <div className='card-body text-dark text-center'>
                       <p>
-                        Praha{' '}
+                        Prague{' '}
                         <span className='badge badge-danger'>
-                          {this.state.city.Praha}
+                          {this.state.city.Pragha}
                         </span>
                       </p>
                       <p>
