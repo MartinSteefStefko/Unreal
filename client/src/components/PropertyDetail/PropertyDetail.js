@@ -57,7 +57,7 @@ class PropertyDetailComponent extends Component {
 
   render() {
     const { property, isLoading, errMess } = this.props;
-    const { ethereum, propertyPriceNow } = this.state;
+    const { propertyPriceNow } = this.state;
     if (isLoading) {
       return (
         <div className='col-12 col-md p-5'>
@@ -86,8 +86,16 @@ class PropertyDetailComponent extends Component {
                   <div className='col-12 pt-4'>
                     <h2>{property.propertytitle} </h2>
                     <h4>{property.address}</h4>
-                    <h3>{`${property.price} ${property.priceUnit}`} </h3>
-                    <h3>{`${propertyPriceNow.ethereum} ${`ETH`}`} </h3>
+                    <h3>
+                      {`${parseFloat(property.price)
+                        .toFixed(2)
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')} ${
+                        property.priceUnit
+                      }`}{' '}
+                    </h3>
+                    <h3>
+                      {`${propertyPriceNow.ethereum.toFixed(6)} ${`ETH`}`}{' '}
+                    </h3>
                     <hr />
                     <div className='pb-4'>
                       <h5>Description</h5>

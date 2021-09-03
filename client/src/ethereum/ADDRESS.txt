@@ -1,1 +1,11 @@
-0xb6002E8974Dd676895F4c129396ba86a95605044
+0xbE39C02Bcf9D698267E2CD5D47f5658233BdeA5f
+
+newContract address (contribute level2)
+0x6a32BC0E0663B8b01a4Ea3d9d6bdBa856dE9C2f4
+
+
+current ContractFactory address
+0xfA8653BEfe561C019a8B5c1e8396da68b86E3850
+
+newContract address (contribute level 3)
+0x0AB8C726305706a5eB50c75c213C234361208cA9

@@ -24,7 +24,7 @@ export const property_all = [
     },
     date: Date.now(),
     campaign: {
-      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+      address: '0x0AB8C726305706a5eB50c75c213C234361208cA9',
     },
   },
   {
@@ -52,7 +52,7 @@ export const property_all = [
     },
     date: Date.now(),
     campaign: {
-      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+      address: '0x0AB8C726305706a5eB50c75c213C234361208cA9',
     },
   },
   {
@@ -66,7 +66,7 @@ export const property_all = [
     description:
       'Naše společnost Vám zprostředkuje pronájem světlého bytu v 2+kk o velikosti 50 m² s balkonem 7m². Byt v se nachází na 3 NP. budovy s celkem 4.NP. Byt je kompletně vybaven (postel, sedačka, televizní stoleček, skříně), na fotografiích bez nábytku. V bytě obývací pokoj s kuchyňským koutem vybaveným vestavěnými spotřebiči a ložnice. Obě místnosti jsou přístupné z chodby a obě mají výstup na balkon orientovaný na jih. V bytě dále koupelna s umyvadlem a vanou, oddělená toaleta a velká šatna s úložnými prostory. Výborná dostupnost na MHD - zastávka tramvaje 4 min. chůze. Pro více informací a prohlídku nás kontaktujte. Ev. číslo: 621405.',
     image: 'Praha4.png',
-    price: '14 500',
+    price: '14500',
     priceUnit: 'CZK',
     area: '57',
     areaUnit: 'm2',
@@ -80,7 +80,7 @@ export const property_all = [
     },
     date: Date.now(),
     campaign: {
-      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+      address: '0x0AB8C726305706a5eB50c75c213C234361208cA9',
     },
   },
 
@@ -109,7 +109,7 @@ export const property_all = [
     },
     date: Date.now(),
     campaign: {
-      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+      address: '0x0AB8C726305706a5eB50c75c213C234361208cA9',
     },
   },
   {
@@ -123,7 +123,7 @@ export const property_all = [
     description:
       'Pronájem nového bytu 2+kk na ulici Údolní v centru Brna. Byt v 6. NP renovovaného bytového domu s výtahem je kompletně zařízený - kuchyně včetně spotřebičů, stůl, židle, skříně, sofa, dvoulůžko, noční stolky, koupelna se sprchovým koutem, pračka. Byt má prosklennou lodžii s výjimečným výhledem na Brno, a k dispozici je také střešní terasa. Byt je volný ihned.',
     image: 'Brno2.png',
-    price: '18 000',
+    price: '18000',
     priceUnit: 'CZK',
     area: '51',
     areaUnit: 'm2',
@@ -137,7 +137,7 @@ export const property_all = [
     },
     date: Date.now(),
     campaign: {
-      address: '0x9206c054B48DBEe5F9d6cC34D5aBe0C7C277C30E',
+      address: '0x0AB8C726305706a5eB50c75c213C234361208cA9',
     },
   },
 ];

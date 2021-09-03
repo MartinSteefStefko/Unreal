@@ -42,7 +42,11 @@ export const addCampaign = async (result) => {
     const accounts = await web3.eth.getAccounts();
 
     const res = await factory.methods
-      .createCampaign(minimumContribution, requiredPropertyPrice.eth, _id)
+      .createCampaign(
+        minimumContribution,
+        web3.utils.toWei(requiredPropertyPrice.eth, 'ether'),
+        _id
+      )
       .send({
         from: accounts[0],
       });

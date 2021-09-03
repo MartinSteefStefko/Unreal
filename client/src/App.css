@@ -40,3 +40,8 @@ h4{
     color: #adadad;
 }
 
+.card.col-12.col-md-4.col-sm-6.mb-2 {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import web3 from '../../ethereum/web3';
 import { Control, Form, Errors } from 'react-redux-form';
 import { Button, Label, Col, Row } from 'reactstrap';
+import ClipLoader from 'react-spinners/ClipLoader';
+import './AddProperty.css';
 
 // import factory from '../../ethereum/factory';
 // import web3 from '../../ethereum/web3';
@@ -43,6 +46,7 @@ class AddPropertyComponent extends Component {
   }
 
   handleSubmit = async (values) => {
+    this.setState({ loading: true, errorMessage: '' });
     const {
       imageFile,
       latitude,
@@ -52,7 +56,7 @@ class AddPropertyComponent extends Component {
       requiredPropertyPrice,
     } = this.state;
     // event.preventDefault();
-    this.setState({ loading: true, errorMessage: '' });
+
     if (imageFile === null) {
       alert('Please add Image of Property');
     } else if (latitude === '') {
@@ -159,7 +163,7 @@ class AddPropertyComponent extends Component {
     const { suggestedPriceAtCreation } = this.state;
     return (
       <div className='container pt-5'>
-        <div className='card p-5 '>
+        <div className='card p-5 add-property-wrapper'>
           <div className='card-title text-center p-4 text-dark'>
             <h3>Add property & campaign</h3>
           </div>
@@ -562,11 +566,17 @@ class AddPropertyComponent extends Component {
               <Row className='form-group'>
                 <Col md={{ size: 6, offset: 2 }}>
                   <Button
-                    loading={this.state.loading}
                     type='submit'
+                    size='lg'
                     className='btn-block btn-purple'
                   >
-                    Add Property
+                    {this.state.loading ? (
+                      <div style={{ height: '' }}>
+                        <ClipLoader size={19} color={'#ffffff'}></ClipLoader>
+                      </div>
+                    ) : (
+                      'Add Property'
+                    )}
                   </Button>
                 </Col>
               </Row>

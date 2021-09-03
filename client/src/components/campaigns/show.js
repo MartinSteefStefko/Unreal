@@ -27,6 +27,7 @@ class CampaignShow extends Component {
 
   state = {
     address: '121212',
+    requiredPrice: '',
     minimumContribution: '0',
     balance: '0',
     requestsCount: '0',
@@ -37,11 +38,8 @@ class CampaignShow extends Component {
 
   async componentDidMount() {
     const address = this.props.property.campaign.address;
-    console.log('address', address);
     const campaign = Campaign(address);
-    console.log('campaign', campaign);
     const summary = await campaign.methods.getSummary().call();
-    console.log('summary', summary);
     this.setState({
       address: address,
       minimumContribution: summary[0],
@@ -74,7 +72,7 @@ class CampaignShow extends Component {
 
     const items = [
       {
-        header: `${requiredPrice} ETH`,
+        header: `${web3.utils.fromWei(requiredPrice, 'ether')} ETH`,
         meta: 'Required price (ETH)',
         description:
           'Price that property owner requires to sell his/her property',
@@ -87,9 +85,9 @@ class CampaignShow extends Component {
       },
       {
         header: manager,
-        meta: 'Address of Manager',
+        meta: 'Address of the property Owner',
         description:
-          'The manager created this campaign and can create requests to withdraw money',
+          'The Owner created this campaign and can create requests to withdraw money',
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -106,7 +104,7 @@ class CampaignShow extends Component {
       },
       {
         header: approversCount,
-        meta: 'Number of Approvers',
+        meta: 'Number of Buyers',
         description:
           'Number of people who have already donated to this campaign',
       },

@@ -45,11 +45,7 @@ class RequestIndex extends Component {
       <div>
         <h3>Requests</h3>
         <Link to={`/campaigns/${this.props.address}/requests/new`}>
-          <a>
-            <Button size='lg' block className='btn-purple'>
-              Add Request
-            </Button>
-          </a>
+          <p className='text-purple'>Add Request</p>
         </Link>
         <Table size='small' basic='very'>
           <Header>

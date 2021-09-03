@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Form, Input, Message } from 'semantic-ui-react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
 // import { Router } from '../routes';
@@ -16,6 +17,7 @@ class ContributeForm extends Component {
     event.preventDefault();
 
     const campaign = Campaign(this.props.address);
+    console.log('this.props.address', this.props.address);
 
     this.setState({ loading: true, errorMessage: '' });
 
@@ -36,33 +38,37 @@ class ContributeForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-        <Form.Field>
-          <label>Amount to Buy</label>
-          <Input
-            value={this.state.value}
-            onChange={(event) => this.setState({ value: event.target.value })}
-            label='ether'
-            labelPosition='right'
-            placeholder={`max. ${'propertyPriceAtCreation.ethereum'}`}
+      <div>
+        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+          <Form.Field>
+            <label>Amount to Buy</label>
+            <Input
+              value={this.state.value}
+              onChange={(event) => this.setState({ value: event.target.value })}
+              label='ether'
+              labelPosition='right'
+              placeholder={`max. ${'propertyPriceAtCreation.ethereum'}`}
+            />
+          </Form.Field>
+          <Message
+            error
+            header='Oops!'
+            style={{ maxWidth: '300px' }}
+            content={this.state.errorMessage}
           />
-        </Form.Field>
 
-        <Message
-          error
-          header='Oops!'
-          style={{ maxWidth: '100px' }}
-          content={this.state.errorMessage}
-        />
-        <Button
-          className='btn-purple '
-          size='lg'
-          block
-          loading={this.state.loading}
-        >
-          Buy!
-        </Button>
-      </Form>
+          <Button className='btn-purple ' size='lg' block>
+            {this.state.loading ? (
+              <div style={{ height: '' }}>
+                <ClipLoader size={19} color={'#ffffff'}></ClipLoader>
+                {/* Preparing Files */}
+              </div>
+            ) : (
+              'Buy!'
+            )}
+          </Button>
+        </Form>
+      </div>
     );
   }
 }

@@ -8,8 +8,8 @@ class Home extends Component {
     super(props);
     this.state = {
       city: {
-        Praha: '0',
-        Brno: '0',
+        Praha: '4',
+        Brno: '2',
       },
       for: {
         sale: '0',
@@ -34,12 +34,12 @@ class Home extends Component {
     //     );
     //   })
     //   .catch((error) => {});
-    this.setState({
-      city: {
-        ...this.state.city,
-        Praha: '4',
-      },
-    });
+    // this.setState({
+    //   city: {
+    //     Praha: '4',
+    //     Brno: '2',
+    //   },
+    // });
     // axios
     //   .get('http://localhost:5000/api/property/count/Brno')
     //   .then((response) => {
@@ -56,44 +56,44 @@ class Home extends Component {
     //     );
     //   })
     //   .catch((error) => {});
-    this.setState({
-      city: {
-        ...this.state.city,
-        Brno: '2',
-      },
-    });
-    axios
-      .get('http://localhost:5000/api/property/count/for/Sale')
-      .then((response) => {
-        this.setState(
-          {
-            for: {
-              ...this.state.for,
-              sale: response.data,
-            },
-          },
-          () => {
-            console.log(this.state);
-          }
-        );
-      })
-      .catch((error) => {});
-    axios
-      .get('http://localhost:5000/api/property/count/for/Rent')
-      .then((response) => {
-        this.setState(
-          {
-            for: {
-              ...this.state.for,
-              rent: response.data,
-            },
-          },
-          () => {
-            console.log(this.state);
-          }
-        );
-      })
-      .catch((error) => {});
+    // this.setState({
+    //   city: {
+    //     Praha: '4',
+    //     Brno: '2',
+    //   },
+    // });
+    // axios
+    //   .get('http://localhost:5000/api/property/count/for/Sale')
+    //   .then((response) => {
+    //     this.setState(
+    //       {
+    //         for: {
+    //           ...this.state.for,
+    //           sale: response.data,
+    //         },
+    //       },
+    //       () => {
+    //         console.log(this.state);
+    //       }
+    //     );
+    //   })
+    //   .catch((error) => {});
+    // axios
+    //   .get('http://localhost:5000/api/property/count/for/Rent')
+    //   .then((response) => {
+    //     this.setState(
+    //       {
+    //         for: {
+    //           ...this.state.for,
+    //           rent: response.data,
+    //         },
+    //       },
+    //       () => {
+    //         console.log(this.state);
+    //       }
+    //     );
+    //   })
+    //   .catch((error) => {});
   }
 
   render() {

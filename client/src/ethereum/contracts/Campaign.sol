@@ -54,7 +54,6 @@ contract Campaign {
         require(msg.value > minimumContribution);
         require(msg.value <= campaignLimit);
         require(address(this).balance <= campaignLimit);
-
         approvers[msg.sender] = true;
         approversCount++;
     }

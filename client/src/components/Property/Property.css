@@ -1,13 +1,29 @@
 .prop-image:hover {
     opacity: 0.8;
+
 }
 .card-property-title{
     font-size: 16px;
     font-weight: bold;
+    color: rgb(70, 70, 70) ;
+    text-decoration: none!important;
+}
+.card-property-title:hover{
+    color: black;
+    text-decoration: none!important;
 }
 .card-property-address{
     font-size: 14px;
 }
 .card-width{
     width: 20rem;
+}
+.card-wrapper {
+    padding: .75rem 1.25rem;
+}
+.card-image {
+    width: 100%!important ;
+}
+.text-purple{
+    color: #580579!important;
 }
