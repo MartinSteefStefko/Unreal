@@ -73,12 +73,13 @@ class CampaignShow extends Component {
         header: `${requiredPrice} ETH`,
         meta: 'Required price (ETH)',
         description:
-          'Price that property owner requires to sell his/her property',
+          'Price, at which property Owner will sell his/her property',
       },
       {
         header: `${balance} ETH`,
         meta: 'Campaign Balance (ether)',
-        description: 'The balance is the portion of property that is bought  .',
+        description:
+          'The balance is the portion of the property,that was bought.',
       },
       {
         header: manager,
@@ -91,7 +92,7 @@ class CampaignShow extends Component {
         header: `${minimumContribution} Wei`,
         meta: 'Minimum Contribution (wei)',
         description:
-          'You must contribute at least this much wei to become an approver',
+          'You must contribute at least this much wei to become a buyer',
       },
       {
         header: requestsCount,
@@ -102,8 +103,7 @@ class CampaignShow extends Component {
       {
         header: approversCount,
         meta: 'Number of Buyers',
-        description:
-          'Number of people who have already donated to this campaign',
+        description: 'Number of people who have already bought this property',
       },
     ];
 
