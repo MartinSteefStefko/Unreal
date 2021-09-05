@@ -21,8 +21,6 @@ git clone https://github.com/MartinStefko/Unreal.git
 ```
 
 
-```
-
 Start the app
 
 ```sh
